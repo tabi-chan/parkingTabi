@@ -69,7 +69,7 @@ struct Parking {
                 vehiculo.montoPagado = monto
                 retirados.append(vehiculo)
                 let indexV = vehiculos.firstIndex(of: vehiculo)
-                vehiculos.remove(at: indexV!)
+                vehiculos.remove(at: indexV!) // HAY QUE DARLE UNA VUELTA PARA EVITAR EL DESTAPE FORZOSO
                 removeOK = true
             }
         }
@@ -110,9 +110,9 @@ struct Parking {
                 fl = true
             }
         }
-        if fl {
-            tiempoEntero = (Int(hOut.prefix(2)) ?? 100) - (Int(horIn.prefix(2)) ?? 100)
-            tiempoFraccion = (Int(hOut.suffix(2)) ?? 5000) - (Int(horIn.suffix(2)) ?? 5000)
+        if fl { // EL NOMBRE DE VARIABLES SIEMPRE DEBE SER REPRESENTATIVO
+            tiempoEntero = (Int(hOut.prefix(2)) ?? 100) - (Int(horIn.prefix(2)) ?? 100) // ¿A QUE CORRESPONDEN LOS 100?
+            tiempoFraccion = (Int(hOut.suffix(2)) ?? 5000) - (Int(horIn.suffix(2)) ?? 5000) // A QUE CORRESPONDEN LOS 5000?
             tiempoXHoraExtra = (tiempoEntero - 2)
             if tiempoEntero == 200 || tiempoFraccion == 10000 || tiempoEntero < 0 {
                 tiempoValido = false
@@ -164,17 +164,16 @@ struct Parking {
         return ""
     }
         
-        func disponibilidad() -> Bool {
-            let n = vehiculos.count
-            if n == 20 {
-                return false
-            } else {
-                return true
-            }
-            
+    func disponibilidad() -> Bool {
+        let n = vehiculos.count
+        if n == 20 {
+            return false
+        } else {
+            return true
         }
+    }
         
-        func contarEspacios() -> Int {
+        func contarEspacios() -> Int { //SOLUCIONAR IDENTACION 
             return (20 - vehiculos.count)
         }
         
@@ -187,6 +186,6 @@ struct Parking {
         }
         return flExiste
     }
-         
-        
+        // NO DEBEN QUEDAR ESTOS ESPACIOS
+    
 }

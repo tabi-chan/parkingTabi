@@ -13,14 +13,14 @@ enum tipoVehi:String {
     case Bus
     case Otro
     
-    
+    // QUITAR UNA LINEA DE ESPACIO
     var valorXtipo: Int{
-        switch self{
-        case .Auto: return 20
-        case .Moto: return 15
-        case .Minibus: return 25
-        case .Bus: return 30
-        case .Otro: return 0
+        switch self {
+            case .Auto: return 20
+            case .Moto: return 15
+            case .Minibus: return 25
+            case .Bus: return 30
+            case .Otro: return 0
         }
     }
 }

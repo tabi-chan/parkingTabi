@@ -11,6 +11,7 @@ class Funciones {
     // MARK: Atributos
     var estacionamiento = Parking()
     // MARK: Ciclo vida
+    // NO DEBE QUEDAR CODIGO COMENTADO
 /*    init(estacionamiento: Parking) {
         self.estacionamiento = estacionamiento
     }
@@ -38,7 +39,7 @@ class Funciones {
             print("Patente:")
             patenteIn = readLine() ?? ""
             if patenteIn == ""{
-                print("Por favor ingrese una opción válida. Si desea salir ingrese '000000'")
+                print("Por favor ingrese una opción válida. Si desea salir ingrese '000000'") // LO CAMBIARIA PARA QUE ESCRIBA SALIR
             }else if patenteIn.contains("000000") == true {
                 print("Has salido del ingreso de Patente")
                 tipoIn = "6"
@@ -46,6 +47,7 @@ class Funciones {
             }
         } while patenteIn == ""
         patenteIn = patenteIn.uppercased()
+        
         if estacionamiento.verificarVehiculo(patenteValidar: patenteIn) {
             print("El vehículo ya existe. Volverá al menú principal")
             return ""
@@ -72,6 +74,7 @@ class Funciones {
                     print("Por favor ingrese una opción válida. Si desea salir ingrese '5'")
                 }
             } while tipoIn == ""
+            
             if tipoIn != "6" {
                 repeat {
                     print("Ingrese hora de ingreso:")
@@ -134,7 +137,7 @@ class Funciones {
                   Opción [2]: No
                   """)
             inDescuento = readLine() ?? ""
-            if inDescuento == "" {
+            if inDescuento == "" { // AÑADIRIA UN "O OPCION MAYOR QUE 2
                 print("Favor ingrese una opción válida. Si desea salir ingrese 0, en ese caso no se aplicará descuento")
             } 
         } while inDescuento == ""
