@@ -80,7 +80,7 @@ struct Parking {
             print("No se ha encontrado el vehículo, recurra a la oficina más cercana D:")
         }
     }
-    
+    // comment
     func verRecaudacion() {
         var total: Int = 0
         print(" Patente         Tipo   Hora Entrada  Hora Salida  Monto Pagado")
