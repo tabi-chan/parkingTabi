@@ -69,7 +69,11 @@ struct Parking {
                 vehiculo.montoPagado = monto
                 retirados.append(vehiculo)
                 let indexV = vehiculos.firstIndex(of: vehiculo)
-                vehiculos.remove(at: indexV!) // HAY QUE DARLE UNA VUELTA PARA EVITAR EL DESTAPE FORZOSO
+                guard let indiceDestapado = indexV else {
+                    print("No se encontró el indice")
+                    return
+                }
+                vehiculos.remove(at: indiceDestapado)
                 removeOK = true
             }
         }
@@ -94,7 +98,7 @@ struct Parking {
     func calcularMonto(placa: String, hOut: String, discount: String) -> String {
         var horIn: String = ""
         var tip: tipoVehi = .Otro
-        var fl: Bool = false
+        var flVehiExiste: Bool = false
         var flDescuento: Bool = false
         var tiempoValido: Bool = true
         var tiempoXHoraExtra: Int = 0
@@ -107,14 +111,23 @@ struct Parking {
             if vehiculo.patente == placa.uppercased() {
                 horIn = vehiculo.horaIn
                 tip = vehiculo.tipo
-                fl = true
+                flVehiExiste = true
             }
         }
-        if fl { // EL NOMBRE DE VARIABLES SIEMPRE DEBE SER REPRESENTATIVO
-            tiempoEntero = (Int(hOut.prefix(2)) ?? 100) - (Int(horIn.prefix(2)) ?? 100) // ¿A QUE CORRESPONDEN LOS 100?
-            tiempoFraccion = (Int(hOut.suffix(2)) ?? 5000) - (Int(horIn.suffix(2)) ?? 5000) // A QUE CORRESPONDEN LOS 5000?
+        if flVehiExiste {
+            var tiempoOUTEntero: Int? = Int(hOut.prefix(2))
+            var tiempoInEntero: Int? = Int(horIn.prefix(2))
+            var tiempoOUTFraccion: Int? = Int(hOut.suffix(2))
+            var tiempoInFraccion: Int? = Int(horIn.suffix(2))
+            guard let tiempoOutDestapado = tiempoOUTEntero else { return "" }
+            guard let tiempoInDestapado = tiempoInEntero else { return "" }
+            guard let tiempoFracOutDestapado = tiempoOUTFraccion else { return "" }
+            guard let tiempoFracInDestapado = tiempoInFraccion else { return "" }
+            
+            tiempoEntero = tiempoOutDestapado - tiempoInDestapado
+            tiempoFraccion = tiempoFracOutDestapado - tiempoFracInDestapado
             tiempoXHoraExtra = (tiempoEntero - 2)
-            if tiempoEntero == 200 || tiempoFraccion == 10000 || tiempoEntero < 0 {
+            if tiempoEntero < 0 {
                 tiempoValido = false
                 print("La cantidad de tiempo no es válida.")
                 return ""
@@ -173,9 +186,9 @@ struct Parking {
         }
     }
         
-        func contarEspacios() -> Int { //SOLUCIONAR IDENTACION 
-            return (20 - vehiculos.count)
-        }
+    func contarEspacios() -> Int {
+        return (20 - vehiculos.count)
+    }
         
     func verificarVehiculo(patenteValidar: String) -> Bool {
         var flExiste: Bool = false
@@ -186,6 +199,4 @@ struct Parking {
         }
         return flExiste
     }
-        // NO DEBEN QUEDAR ESTOS ESPACIOS
-    
 }

@@ -13,7 +13,6 @@ enum tipoVehi:String {
     case Bus
     case Otro
     
-    // QUITAR UNA LINEA DE ESPACIO
     var valorXtipo: Int{
         switch self {
             case .Auto: return 20
